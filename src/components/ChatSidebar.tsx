@@ -51,7 +51,8 @@ export const ChatSidebar = () => {
 
     setDialogIsOpen(false);
     setTextInput("");
-
+    setActiveChat(threadId);
+    
     navigate(`/thread/${threadId}`);
   };
   
