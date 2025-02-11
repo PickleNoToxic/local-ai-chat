@@ -16,16 +16,23 @@ export interface DEX_Thread {
   updated_at: Date;
 }
 
+export interface DEX_StatementData {
+  keyword: string;
+  description: Blob;
+}
+
 class ChatDB extends Dexie {
   messages!: Table<DEX_Message, string>;
   threads!: Table<DEX_Thread, string>;
+  statementData!: Table<DEX_StatementData, string>;
 
   constructor() {
     super("chatdb");
 
-    this.version(1).stores({
+    this.version(2).stores({
       messages: "id, role, content, threadId, created_at",
       threads: "id, title, created_at, updated_at",
+      statementData: "keyword, description",
     });
 
     this.threads.hook("creating", (_key, obj) => {
@@ -36,6 +43,25 @@ class ChatDB extends Dexie {
     this.messages.hook("creating", (_key, obj) => {
       obj.created_at = new Date();
     });
+    this.seedDatabase();
+  }
+
+  async seedDatabase() {
+    const lipstickCount = await this.statementData.count();
+    if (lipstickCount === 0) {
+      console.log("Seeding lipstick data...");
+      await this.statementData.bulkPut([
+        {
+          keyword: "lipstick",
+          description: new Blob(["A cosmetic product used to color the lips."]),
+        },
+        {
+          keyword: "lipstick",
+          description: new Blob(["A cosmetic product used to color the lips."]),
+        },
+      ]);
+      console.log("Lipstick data seeded successfully.");
+    }
   }
 
   async createThread(title: string) {
@@ -48,7 +74,7 @@ class ChatDB extends Dexie {
       updated_at: new Date(),
     });
 
-    return id
+    return id;
   }
 
   async getAllThreads() {
@@ -70,10 +96,9 @@ class ChatDB extends Dexie {
       await this.threads.update(message.threadId, {
         updated_at: new Date(),
       });
+    });
 
-    })
-
-    return messageId
+    return messageId;
   }
 
   async getMessagesForThread(threadId: string) {
@@ -81,6 +106,19 @@ class ChatDB extends Dexie {
       .where("threadId")
       .equals(threadId)
       .sortBy("created_at");
+  }
+
+  async bulkAddstatementData(dataArray: Omit<DEX_StatementData, "id">[]) {
+    const records = dataArray.map((data) => ({
+      id: crypto.randomUUID(),
+      ...data,
+    }));
+
+    await this.statementData.bulkPut(records);
+  }
+
+  async getstatementData() {
+    return this.statementData.toArray();
   }
 }
 

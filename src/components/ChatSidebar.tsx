@@ -1,4 +1,4 @@
-import { Moon, Plus, Sun } from "lucide-react";
+ import { Moon, Plus, Sun } from "lucide-react";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -104,7 +104,7 @@ export const ChatSidebar = () => {
                 {threads?.map((thread) => (
                   <SidebarMenuItem key={thread.id}>
                     <Link to={`/thread/${thread.id}`}>
-                      <SidebarMenuButton
+                      <SidebarMenuButton 
                         onClick={() => setActiveChat(thread.id)}
                         isActive={activeChat === thread.id}
                       >

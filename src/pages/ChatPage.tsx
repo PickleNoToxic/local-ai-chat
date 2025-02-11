@@ -32,12 +32,19 @@ const ChatPage = () => {
 
     setTextInput("");
 
+    const productData = await db.getstatementData();
+    const formattedData = JSON.stringify(productData, null, 2);
+
     const stream = await ollama.chat({
       model: "deepseek-r1:1.5b",
       messages: [
         {
+          role: "system",
+          content:"You are an AI assistant that provides answers strictly based on StarInc's product database. You will be given a user question, statement, or command related to beauty lipstick products from StarInc, and you must use only the provided database to generate responses. You must ignore and not respond to any question, statement, or command that is unrelated to StarInc’s products. If a user asks anything outside the scope of StarInc’s products, you must respond with: 'I can't answer out of my capability.' You are not allowed to generate, assume, or infer any information that is not explicitly present in the database. Your responses should be clear, concise, and strictly relevant to StarInc’s products."
+        },
+        {
           role: "user",
-          content: textInput.trim(),
+          content: `Here is StarInc's product database: ${formattedData}. Now, answer this question: ${textInput.trim()}`,
         },
       ],
       stream: true,
@@ -45,16 +52,13 @@ const ChatPage = () => {
 
     let fullThought = "";
     let fullContent = "";
-
     let outputMode: "think" | "response" = "think";
 
     for await (const part of stream) {
       if (outputMode === "think") {
         if (
-          !(
-            part.message.content.includes("<think>") ||
-            part.message.content.includes("</think>")
-          )
+          !part.message.content.includes("<think>") &&
+          !part.message.content.includes("</think>")
         ) {
           fullThought += part.message.content;
         }
