@@ -19,7 +19,7 @@ export interface DEX_Thread {
 export interface DEX_StatementData {
   id: string;
   keyword: string;
-  description: Array<string>;
+  description: string;
 }
 
 class ChatDB extends Dexie {
@@ -52,52 +52,33 @@ class ChatDB extends Dexie {
       {
         id: crypto.randomUUID(),
         keyword: "Company Profile StarInc",
-        description: [
-          'StarInc adalah brand lokal Indonesia yang mengusung "Holistic Healthy Beauty" sesuai K-Beauty terkini.',
-          "StarInc lahir dari kepedulian yang tinggi terhadap kasus bullying.",
-          '"Kami ingin semua orang dapat lebih percaya diri, bangga dengan diri masing-masing dan memancarkan ‘star’ dalam diri mereka,"',
-          "ungkap Founder dan CEO StarInc International, Jean Michelle.",
-        ],
+        description: 'Brand lokal Indonesia bidang kecantikan sesuai K-Beauty terkini.',
+      },
+      {
+        id: crypto.randomUUID(),
+        keyword: "Pendiri/Founder StarInc",
+        description: 'Jean Michelle.',
       },
       {
         id: crypto.randomUUID(),
         keyword: "Contact Person StarInc",
-        description: [
-          "Untuk informasi lebih lanjut, hubungi:",
-          "- Nama: Budi Santoso",
-          "- Jabatan: Customer Relations Manager",
-          "- Email: budi.santoso@StarInc.com",
-          "- Telepon: +62 812-3456-7890",
-        ],
+        description: 'Budi Santoso (Customer Relations Manager), email: budi.santoso@StarInc.com, telepon: +62 812-3456-7890',
       },
       {
         id: crypto.randomUUID(),
         keyword: "Director StarInc",
-        description: [
-          "Direktur utama perusahaan StarInc adalah Ibu Siti Kartika.",
-          "Beliau memiliki pengalaman lebih dari 20 tahun di bidang kecantikan,",
-          "dan telah memimpin perusahaan dalam inovasi dan ekspansi bisnis secara global.",
-        ],
+        description: 'Ibu Siti Kartika',
       },
 
       {
         id: crypto.randomUUID(),
-        keyword: "Jam Kerja StarInc",
-        description: [
-          "Jam operasional perusahaan StarInc:",
-          "- Senin - Jumat: 08:00 - 18:00 WIB",
-          "- Sabtu: 09:00 - 15:00 WIB",
-          "- Minggu & Hari Libur Nasional: Tutup",
-        ],
+        keyword: "Jam Kerja/Operasional StarInc",
+        description: 'Senin - Jumat : 08:00 - 18:00 WIB, Sabtu: 09:00 - 15:00 WIB, Minggu & Hari Libur Nasional: Tutup',
       },
       {
         id: crypto.randomUUID(),
         keyword: "Lokasi StarInc",
-        description: [
-          "Alamat kantor pusat Perusahaan StarInc:",
-          "Jalan Teknologi No. 10, Jakarta, Indonesia.",
-          "Google Maps: https://goo.gl/maps/example",
-        ],
+        description: "Jalan Teknologi No. 10, Jakarta, Indonesia. Google Maps: https://goo.gl/maps/example",
       },
       {
         id: crypto.randomUUID(),
