@@ -52,62 +52,63 @@ class ChatDB extends Dexie {
       {
         id: crypto.randomUUID(),
         keyword: "Company Profile StarInc",
-        description: 'Brand lokal Indonesia bidang kecantikan sesuai K-Beauty terkini.',
+        description:
+          "Brand lokal Indonesia bidang kecantikan sesuai K-Beauty terkini.",
       },
       {
         id: crypto.randomUUID(),
         keyword: "Pendiri/Founder StarInc",
-        description: 'Jean Michelle.',
+        description: "Jean Michelle.",
       },
       {
         id: crypto.randomUUID(),
         keyword: "Contact Person StarInc",
-        description: 'Budi Santoso (Customer Relations Manager), email: budi.santoso@StarInc.com, telepon: +62 812-3456-7890',
+        description:
+          "Budi Santoso (Customer Relations Manager), email: budi.santoso@StarInc.com, telepon: +62 812-3456-7890",
       },
       {
         id: crypto.randomUUID(),
         keyword: "Director StarInc",
-        description: 'Ibu Siti Kartika',
+        description: "Ibu Siti Kartika",
       },
 
       {
         id: crypto.randomUUID(),
         keyword: "Jam Kerja/Operasional StarInc",
-        description: 'Senin - Jumat : 08:00 - 18:00 WIB, Sabtu: 09:00 - 15:00 WIB, Minggu & Hari Libur Nasional: Tutup',
+        description:
+          "Senin - Jumat : 08:00 - 18:00 WIB, Sabtu: 09:00 - 15:00 WIB, Minggu & Hari Libur Nasional: Tutup",
       },
       {
         id: crypto.randomUUID(),
         keyword: "Lokasi StarInc",
-        description: "Jalan Teknologi No. 10, Jakarta, Indonesia. Google Maps: https://goo.gl/maps/example",
+        description:
+          "Jalan Teknologi No. 10, Jakarta, Indonesia. Google Maps: https://goo.gl/maps/example",
       },
       {
         id: crypto.randomUUID(),
-        keyword: "Customer Support StarInc",
-        description: [
-          "Dukungan pelanggan tersedia melalui:",
-          "- Email: support@StarInc.com",
-          "- WhatsApp: +62 812-9876-5432",
-          "- Live Chat: Kunjungi website kami di www.StarInc.com",
-        ],
+        keyword: "Produk StarInc, Dream Kissed",
+        description:
+          "Body cream 240g dengan harga Rp. 185,000. BPOM: NA18220110136. Melembapkan, meremajakan, dan menutrisi kulit dengan Vitamin C, K, dan E. Membantu mencerahkan, menenangkan kemerahan, menyamarkan bekas luka dan jerawat. Melindungi dari sinar UV dan radikal bebas, serta mengurangi jerawat, penuaan, hiperpigmentasi, dan flek. Mengandung Aqua Phytoplex 4-in-1 Essential Oil, Sunflower Oil, Argan Oil, Canola Oil, Meadowfoam Seed Oil, dan 5% Niacinamide.",
       },
       {
         id: crypto.randomUUID(),
-        keyword: "Misi StarInc",
-        description: [
-          "Kecantikan tidak hanya terpancar dari luar, namun juga dari dalam.",
-          "Dengan konsep “Holistic Healthy Beauty” StarInc menghadirkan produk-produk yang menyehatkan secara menyeluruh.",
-          "Kami percaya, kecantikan sejati dapat terpancar dengan merawat tubuh dari luar dan dalam.",
-          "StarInc berkomitmen memberikan produk-produk berkualitas dan mempercayakan formulasi produk di Korea Selatan.",
-          "Kami yakin, produk-produk dari StarInc dapat menjadi alternatif terbaik di Indonesia.",
-        ],
+        keyword: "Produk StarInc, SNOW KISSED SEDUCE",
+        description:
+          "Body serum 230g dengan harga Rp. 165,000. BPOM: NA18220110135. Menghadirkan efek 'Snow White Skin' dengan aroma Seduce (King William Pear, Freesia, Patchouli). Melembapkan, meremajakan, dan menutrisi kulit dengan Vitamin C, K, dan E. Mencerahkan, menenangkan kemerahan, serta mempercepat penyembuhan bekas luka dan jerawat. Melindungi dari sinar UV dan radikal bebas, serta mengurangi acne, penuaan, hiperpigmentasi, dan flek. Mengandung Aqua Phytoplex 4-in-1 Essential Oil, Sunflower Oil, Argan Oil, Canola Oil, Meadowfoam Seed Oil, 3% Niacinamide, dan Titanium Dioxide.",
       },
       {
         id: crypto.randomUUID(),
-        keyword: "Visi StarInc",
-        description: [
-          "Siap Memancarkan Pesona Cantikmu pada Dunia.",
-          "Because We Believe, There’s a Star In You",
-        ],
+        keyword: "Produk StarInc, SNOW KISSED BREEZE",
+        description:
+          "Body serum 230g dengan harga Rp. 165,000. BPOM: NA18220112484. Menghadirkan efek 'Snow White Skin' dengan aroma Breeze (Tangarine, Rose, Cedarwood, Peach, Vanilla). Karakter aroma berbasis oriental, fruity, floral, dan musky dengan kombinasi Tangarine, Rose, Sambac Jasmine, Coffee, Praline, Cedarwood, Peach, Tonka Beans, Vanilla, Musk, Sandalwood, dan Patchouli. Melembapkan, meremajakan, dan menutrisi kulit dengan Vitamin C, K, dan E. Mencerahkan, menenangkan kemerahan, serta mempercepat penyembuhan bekas luka dan jerawat. Melindungi dari sinar UV dan radikal bebas, serta mengurangi acne, penuaan, hiperpigmentasi, dan flek. Mengandung Aqua Phytoplex 4-in-1 Essential Oil, Sunflower Oil, Argan Oil, Canola Oil, Meadowfoam Seed Oil, Niacinamide, dan Titanium Dioxide.",
+      },
+      {
+        id: crypto.randomUUID(),
+        keyword: "Produk StarInc, CONFIDENCE BURST",
+        description:
+          "Deodorizer serum spray 60ml dengan harga Rp. 135,000. BPOM: NA18220900367. Menghilangkan bau badan hingga 72 jam, menyamarkan kerutan, dan mencerahkan warna kulit. Berbentuk spray, mudah digunakan, cepat menyerap, tidak lengket, dan tidak meninggalkan noda. Dapat digunakan di setiap lipatan tubuh dengan aroma segar. Cara penggunaan: Semprotkan pada lipatan kulit (ketiak, siku, lutut) yang bersih dan kering. Mengandung Allantoin, Aloe Vera, Glutathione, Castor Oil, dan Niacinamide.",
+      },
+
       // },
       // {
       //   id: crypto.randomUUID(),
@@ -696,7 +697,7 @@ class ChatDB extends Dexie {
       //     "Habbatussauda: Mendukung sistem kekebalan tubuh dan melawan infeksi.",
       //     "Minyak Zaitun: Menjaga kesehatan jantung dan melindungi dari radikal bebas.",
       //   ],
-      },
+      // },
     ]);
   }
 
@@ -752,7 +753,6 @@ class ChatDB extends Dexie {
 
     await this.statementData.bulkPut(records);
   }
-
 
   async getstatementData() {
     return this.statementData.toArray();
