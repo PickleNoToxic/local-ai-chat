@@ -1,6 +1,8 @@
+import os
 import sys
 import time
 import threading
+from langchain.docstore.document import Document
 from langchain.embeddings import OllamaEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import Ollama
@@ -8,30 +10,29 @@ from langchain.chains import RetrievalQA
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-# Load the document
-file_path = "pythonhehe/data_company.txt"
-loader = TextLoader(file_path, encoding="utf-8")
-documents = loader.load()
+# Folder tempat menyimpan file teks
+folder_path = "pythonhehe/datacompany"
 
-with open(file_path, "r", encoding="utf-8") as f:
-    text = f.read()
+documents = []
+# Load all text files from the directory
+for filename in os.listdir(folder_path):
+    if filename.endswith(".txt"):
+        file_path = os.path.join(folder_path, filename)
+        loader = TextLoader(file_path, encoding="utf-8")
+        docs = loader.load()
 
-# Estimate token count and set chunk size dynamically
-char_count = len(text)
-token_estimate = char_count / 5
+        # Tambahkan metadata, misalnya kategori "produk"
+        for doc in docs:
+            doc.metadata["category"] = "produk" if "product" in filename.lower() else "general"
+        
+        documents.extend(docs)
 
-if token_estimate <= 1000:
-    chunk_size = 500
-    chunk_overlap = 100
-elif token_estimate <= 2000:
-    chunk_size = 800
-    chunk_overlap = 200
-elif token_estimate <= 4000:
-    chunk_size = 1200
-    chunk_overlap = 300
-else:
-    chunk_size = 1500  
-    chunk_overlap = 400
+# Menggabungkan semua teks untuk menghitung ukuran optimal
+all_text = "\n".join([doc.page_content for doc in documents])
+char_count = len(all_text)
+    
+chunk_size = int(char_count * 0.3)
+chunk_overlap = int(char_count * 0.1)
 
 print(f"Optimal chunk size: {chunk_size}, Chunk overlap: {chunk_overlap}")
 
@@ -42,17 +43,21 @@ texts = text_splitter.split_documents(documents)
 # Initialize embeddings and vector store
 embedding = OllamaEmbeddings(model="nomic-embed-text") 
 vectorstore = FAISS.from_documents(texts, embedding)
+# vectorstore.index.normalize_L2()
+
 
 # Load LLM model
-llm = Ollama(model="deepseek-r1:7b") 
-qa_chain = RetrievalQA.from_chain_type(llm, retriever=vectorstore.as_retriever())
+llm = Ollama(model="gemma2:9b") 
+retriever = vectorstore.as_retriever(search_kwargs={"k": 50, "filter": {"category": "produk"}})
+
+qa_chain = RetrievalQA.from_chain_type(llm, retriever=retriever)
 
 # Function to animate "Loading..."
 loading = True
 
 
 def run_query(query):
-    prompt = f"Jawab dalam bahasa Indonesia: {query}"
+    prompt = f"Anda adalah sebuah asisten chatbot yang bertugas untuk menjawab pertanyaan berdasarkan teks yang telah diberikan. Teks tersebut berisi informasi tentang perusahaan StarInc. Ini adalah pertanyaan yang akan Anda jawab: {query}. Jika tidak ada jawaban di dalam database, jawab: 'Maaf, saya tidak bisa menjawab di luar kemampuan saya. Silahkan hubungi pihak yang terkait untuk informasi lebih lanjut.' "
     return qa_chain.run(prompt)
 
 
